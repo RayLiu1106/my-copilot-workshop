@@ -3,50 +3,17 @@
     --muted: #71808a;
     --paper: #fffdf8;
     --surface: #ffffff;
-    --page: #f4f1e9;
-    --glow-one: rgba(245, 193, 142, 0.34);
-    --glow-two: rgba(159, 205, 190, 0.3);
     --line: #e6e8e3;
     --accent: #e36b45;
     --accent-dark: #ba4f2e;
     --accent-soft: #fff0e9;
+    --body-bg: #f4f1e9;
+    --glow-one: rgba(245, 193, 142, 0.34);
+    --glow-two: rgba(159, 205, 190, 0.3);
     --button-text: #ffffff;
+    --card-border: rgba(255, 255, 255, 0.7);
     --shadow: 0 20px 55px rgba(45, 52, 48, 0.12);
     --radius: 22px;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --ink: #edf1ed;
-        --muted: #aab7b5;
-        --paper: #202a2d;
-        --surface: #293537;
-        --page: #11191c;
-        --glow-one: rgba(183, 103, 67, 0.2);
-        --glow-two: rgba(67, 126, 116, 0.18);
-        --line: #3c4b4d;
-        --accent: #f18a62;
-        --accent-dark: #ffad8d;
-        --accent-soft: #46312c;
-        --button-text: #1d2527;
-        --shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
-    }
-}
-
-[data-theme="light"] {
-    --ink: #24313a;
-    --muted: #71808a;
-    --paper: #fffdf8;
-    --surface: #ffffff;
-    --page: #f4f1e9;
-    --glow-one: rgba(245, 193, 142, 0.34);
-    --glow-two: rgba(159, 205, 190, 0.3);
-    --line: #e6e8e3;
-    --accent: #e36b45;
-    --accent-dark: #ba4f2e;
-    --accent-soft: #fff0e9;
-    --button-text: #ffffff;
-    --shadow: 0 20px 55px rgba(45, 52, 48, 0.12);
 }
 
 [data-theme="dark"] {
@@ -54,15 +21,16 @@
     --muted: #aab7b5;
     --paper: #202a2d;
     --surface: #293537;
-    --page: #11191c;
-    --glow-one: rgba(183, 103, 67, 0.2);
-    --glow-two: rgba(67, 126, 116, 0.18);
-    --line: #3c4b4d;
-    --accent: #f18a62;
-    --accent-dark: #ffad8d;
+    --line: #405053;
+    --accent: #ffad8d;
+    --accent-dark: #f18a62;
     --accent-soft: #46312c;
+    --body-bg: #151b1d;
+    --glow-one: rgba(155, 82, 56, 0.2);
+    --glow-two: rgba(55, 111, 104, 0.2);
     --button-text: #1d2527;
-    --shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
 }
 
 * {
@@ -79,7 +47,7 @@ body {
     background:
         radial-gradient(circle at 10% 12%, var(--glow-one), transparent 28%),
         radial-gradient(circle at 90% 88%, var(--glow-two), transparent 30%),
-        var(--page);
+        var(--body-bg);
     font-family: "Trebuchet MS", "Microsoft JhengHei", sans-serif;
 }
 
@@ -87,7 +55,7 @@ body {
     width: min(100%, 520px);
     overflow: hidden;
     background: var(--paper);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--card-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
@@ -100,28 +68,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 16px;
-}
-
-.theme-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    flex: 0 0 auto;
-    padding: 8px 10px;
-    color: var(--ink);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.78rem;
-    transition: border-color 160ms ease, background 160ms ease;
-}
-
-.theme-toggle:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+    gap: 18px;
 }
 
 .eyebrow {
@@ -138,6 +85,25 @@ h1 {
     font-size: clamp(2.1rem, 8vw, 3.1rem);
     line-height: 1;
     letter-spacing: 0.02em;
+}
+
+.theme-toggle {
+    flex: 0 0 auto;
+    padding: 9px 11px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: border-color 160ms ease, background 160ms ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
 }
 
 .subtitle {
@@ -187,21 +153,21 @@ h1 {
     transform: translateY(-1px);
 }
 
-.filters {
+.filter-tabs {
     display: flex;
     gap: 8px;
     padding: 0 38px 22px;
 }
 
 .filter-button {
-    padding: 7px 14px;
+    padding: 7px 13px;
     color: var(--muted);
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 9px;
+    border-radius: 8px;
     cursor: pointer;
     font: inherit;
-    font-size: 0.86rem;
+    font-size: 0.85rem;
 }
 
 .filter-button:hover,
@@ -318,18 +284,20 @@ h1 {
 
     .todo-header,
     .todo-form,
-    .filters,
+    .filter-tabs,
     .todo-list {
         padding-right: 20px;
         padding-left: 20px;
     }
 
-    .theme-toggle {
-        padding: 7px;
+    .title-row {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 14px;
     }
 
-    .theme-label {
-        display: none;
+    .theme-toggle {
+        align-self: flex-start;
     }
 
     .todo-footer {
