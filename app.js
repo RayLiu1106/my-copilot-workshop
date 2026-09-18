@@ -9,7 +9,8 @@ const themeToggle = document.querySelector("#theme-toggle");
 const filterButtons = document.querySelectorAll(".filter-button");
 
 let todos = loadTodos();
-let currentFilter = "all";
+const filterStorageKey = "offline-todo-filter";
+let currentFilter = loadFilter();
 const themeStorageKey = "offline-todo-theme";
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -32,6 +33,19 @@ function loadTodos() {
 
 function saveTodos() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
+
+function loadFilter() {
+  const savedFilter = localStorage.getItem(filterStorageKey);
+  return ["all", "active", "completed"].includes(savedFilter) ? savedFilter : "all";
+}
+
+function updateFilterButtons() {
+  filterButtons.forEach((filterButton) => {
+    const isActive = filterButton.dataset.filter === currentFilter;
+    filterButton.classList.toggle("active", isActive);
+    filterButton.setAttribute("aria-pressed", String(isActive));
+  });
 }
 
 function getVisibleTodos() {
@@ -139,14 +153,12 @@ systemTheme.addEventListener("change", () => {
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentFilter = button.dataset.filter;
-    filterButtons.forEach((filterButton) => {
-      const isActive = filterButton === button;
-      filterButton.classList.toggle("active", isActive);
-      filterButton.setAttribute("aria-pressed", String(isActive));
-    });
+    localStorage.setItem(filterStorageKey, currentFilter);
+    updateFilterButtons();
     renderTodos();
   });
 });
 
 applyTheme();
+updateFilterButtons();
 renderTodos();
