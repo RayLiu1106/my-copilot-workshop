@@ -1,0 +1,224 @@
+:root {
+    --ink: #24313a;
+    --muted: #71808a;
+    --paper: #fffdf8;
+    --surface: #ffffff;
+    --line: #e6e8e3;
+    --accent: #e36b45;
+    --accent-dark: #ba4f2e;
+    --accent-soft: #fff0e9;
+    --shadow: 0 20px 55px rgba(45, 52, 48, 0.12);
+    --radius: 22px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 32px 16px;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 10% 12%, rgba(245, 193, 142, 0.34), transparent 28%),
+        radial-gradient(circle at 90% 88%, rgba(159, 205, 190, 0.3), transparent 30%),
+        #f4f1e9;
+    font-family: "Trebuchet MS", "Microsoft JhengHei", sans-serif;
+}
+
+.todo-card {
+    width: min(100%, 520px);
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.todo-header {
+    padding: 38px 38px 24px;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+h1 {
+    margin: 0;
+    font-family: Georgia, "Microsoft JhengHei", serif;
+    font-size: clamp(2.1rem, 8vw, 3.1rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.subtitle {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.todo-form {
+    display: flex;
+    gap: 10px;
+    padding: 0 38px 24px;
+}
+
+.todo-form input {
+    min-width: 0;
+    flex: 1;
+    padding: 13px 15px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    outline: none;
+    font: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.todo-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.todo-form button {
+    padding: 0 19px;
+    color: #fff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 11px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition: background 160ms ease, transform 160ms ease;
+}
+
+.todo-form button:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.todo-list {
+    min-height: 190px;
+    padding: 0 38px;
+}
+
+#todo-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    animation: appear 180ms ease both;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.todo-text {
+    min-width: 0;
+    flex: 1;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+}
+
+.todo-item.completed .todo-text {
+    color: var(--muted);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.delete-button {
+    flex: 0 0 auto;
+    padding: 5px 8px;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+}
+
+.delete-button:hover {
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+}
+
+.empty-state {
+    margin: 49px 0 0;
+    color: var(--muted);
+    text-align: center;
+    font-size: 0.94rem;
+}
+
+.todo-footer {
+    margin-top: 26px;
+    padding: 18px 38px 22px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    .todo-header,
+    .todo-form,
+    .todo-list {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .todo-footer {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+}
