@@ -3,12 +3,66 @@
     --muted: #71808a;
     --paper: #fffdf8;
     --surface: #ffffff;
+    --page: #f4f1e9;
+    --glow-one: rgba(245, 193, 142, 0.34);
+    --glow-two: rgba(159, 205, 190, 0.3);
     --line: #e6e8e3;
     --accent: #e36b45;
     --accent-dark: #ba4f2e;
     --accent-soft: #fff0e9;
+    --button-text: #ffffff;
     --shadow: 0 20px 55px rgba(45, 52, 48, 0.12);
     --radius: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ink: #edf1ed;
+        --muted: #aab7b5;
+        --paper: #202a2d;
+        --surface: #293537;
+        --page: #11191c;
+        --glow-one: rgba(183, 103, 67, 0.2);
+        --glow-two: rgba(67, 126, 116, 0.18);
+        --line: #3c4b4d;
+        --accent: #f18a62;
+        --accent-dark: #ffad8d;
+        --accent-soft: #46312c;
+        --button-text: #1d2527;
+        --shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+    }
+}
+
+[data-theme="light"] {
+    --ink: #24313a;
+    --muted: #71808a;
+    --paper: #fffdf8;
+    --surface: #ffffff;
+    --page: #f4f1e9;
+    --glow-one: rgba(245, 193, 142, 0.34);
+    --glow-two: rgba(159, 205, 190, 0.3);
+    --line: #e6e8e3;
+    --accent: #e36b45;
+    --accent-dark: #ba4f2e;
+    --accent-soft: #fff0e9;
+    --button-text: #ffffff;
+    --shadow: 0 20px 55px rgba(45, 52, 48, 0.12);
+}
+
+[data-theme="dark"] {
+    --ink: #edf1ed;
+    --muted: #aab7b5;
+    --paper: #202a2d;
+    --surface: #293537;
+    --page: #11191c;
+    --glow-one: rgba(183, 103, 67, 0.2);
+    --glow-two: rgba(67, 126, 116, 0.18);
+    --line: #3c4b4d;
+    --accent: #f18a62;
+    --accent-dark: #ffad8d;
+    --accent-soft: #46312c;
+    --button-text: #1d2527;
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -23,9 +77,9 @@ body {
     padding: 32px 16px;
     color: var(--ink);
     background:
-        radial-gradient(circle at 10% 12%, rgba(245, 193, 142, 0.34), transparent 28%),
-        radial-gradient(circle at 90% 88%, rgba(159, 205, 190, 0.3), transparent 30%),
-        #f4f1e9;
+        radial-gradient(circle at 10% 12%, var(--glow-one), transparent 28%),
+        radial-gradient(circle at 90% 88%, var(--glow-two), transparent 30%),
+        var(--page);
     font-family: "Trebuchet MS", "Microsoft JhengHei", sans-serif;
 }
 
@@ -40,6 +94,34 @@ body {
 
 .todo-header {
     padding: 38px 38px 24px;
+}
+
+.title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.78rem;
+    transition: border-color 160ms ease, background 160ms ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
 }
 
 .eyebrow {
@@ -90,7 +172,7 @@ h1 {
 
 .todo-form button {
     padding: 0 19px;
-    color: #fff;
+    color: var(--button-text);
     background: var(--accent);
     border: 0;
     border-radius: 11px;
@@ -103,6 +185,30 @@ h1 {
 .todo-form button:hover {
     background: var(--accent-dark);
     transform: translateY(-1px);
+}
+
+.filters {
+    display: flex;
+    gap: 8px;
+    padding: 0 38px 22px;
+}
+
+.filter-button {
+    padding: 7px 14px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.86rem;
+}
+
+.filter-button:hover,
+.filter-button.active {
+    color: var(--accent-dark);
+    background: var(--accent-soft);
+    border-color: var(--accent);
 }
 
 .todo-list {
@@ -212,9 +318,18 @@ h1 {
 
     .todo-header,
     .todo-form,
+    .filters,
     .todo-list {
         padding-right: 20px;
         padding-left: 20px;
+    }
+
+    .theme-toggle {
+        padding: 7px;
+    }
+
+    .theme-label {
+        display: none;
     }
 
     .todo-footer {
