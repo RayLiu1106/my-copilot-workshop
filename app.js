@@ -61,9 +61,10 @@ function getVisibleTodos() {
 }
 
 function renderTodos() {
+  const visibleTodos = getVisibleTodos();
   todoList.replaceChildren();
 
-  getVisibleTodos().forEach((todo) => {
+  visibleTodos.forEach((todo) => {
     const item = document.createElement("li");
     item.className = "todo-item";
     item.classList.toggle("completed", todo.completed);
@@ -91,12 +92,12 @@ function renderTodos() {
 
   if (todos.length === 0) {
     emptyState.textContent = "還沒有任何待辦事項，新增一個吧!";
-  } else if (getVisibleTodos().length === 0) {
+  } else if (visibleTodos.length === 0) {
     emptyState.textContent = currentFilter === "active"
       ? "太棒了，目前沒有未完成事項!"
-      : "目前沒有已完成事項。";
+      : "目前沒有已完成的事項，項目仍保留在清單中。";
   }
-  emptyState.hidden = getVisibleTodos().length > 0;
+  emptyState.hidden = visibleTodos.length > 0;
   remainingCount.textContent = `未完成:${todos.filter((todo) => !todo.completed).length} 項`;
 }
 
